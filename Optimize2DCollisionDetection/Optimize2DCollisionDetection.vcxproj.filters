@@ -7,5 +7,6 @@
     <ClInclude Include="timer.hpp" />
     <ClInclude Include="vec2_traits.hpp" />
     <ClInclude Include="vec2.hpp" />
+    <ClInclude Include="range_traits.hpp" />
   </ItemGroup>
 </Project>
