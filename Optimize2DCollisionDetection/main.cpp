@@ -1,14 +1,17 @@
 #include<iostream>
 #include"timer.hpp"
 #include"vec2_traits.hpp"
-
-struct hoge { float x, y; };
+#include"vec2.hpp"
 
 int main()
 {
-	hoge huga{ 1.f,2.f };
-	std::cout << my::vec2_traits<hoge>::get_x(huga) << std::endl;
-	std::cout << my::vec2_traits<hoge>::get_y(huga) << std::endl;
+
+	constexpr my::vec2f a{ 1.f,2.f };
+	constexpr my::vec2f b{ 4.f,5.f };
+
+	constexpr float c = my::vec2f::dot(a, b);
+
+	static_assert(my::vec2f::dot(a, b));
 
 	return 0;
 }
