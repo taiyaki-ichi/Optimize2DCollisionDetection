@@ -42,6 +42,7 @@ namespace collision_detection
 		}
 	};
 	
+	//いろいろ変更できるようにメンバ関数はテンプレートにしておく
 	template<>
 	struct collision_detection_traits<my::shape>
 	{
@@ -52,6 +53,7 @@ namespace collision_detection
 		}
 	};
 
+	//とりあえず衝突したShapeの数を数える予定
 	template<>
 	struct hit_traits<my::shape>
 	{

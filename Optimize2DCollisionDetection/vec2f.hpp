@@ -3,6 +3,7 @@
 
 namespace my
 {
+	//flaot‚Ì2ŽŸŒ³ƒxƒNƒgƒ‹
 	struct vec2f
 	{
 		float x;

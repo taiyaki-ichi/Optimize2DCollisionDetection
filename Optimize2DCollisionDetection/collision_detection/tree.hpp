@@ -3,6 +3,7 @@
 namespace collision_detection
 {
 	//TreeImplはinit,resist,search,clearを実装
+	//計測し比較するため実装部分は入れ替えられるようにテンプレートにした。
 	//Objectはrange_traits,collision_detection_traits,hit_traitsを満たす
 	template<typename TreeImpl,typename Object>
 	class tree

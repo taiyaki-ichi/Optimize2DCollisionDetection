@@ -6,6 +6,7 @@ namespace collision_detection
 	struct hit_traits
 	{
 		//2つのObjectが当たっているときに呼び出される
+		//テンプレートを特殊化して使用
 		static void hit(const Object&, const Object&);
 	};
 }
