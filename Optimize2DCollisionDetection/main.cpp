@@ -1,16 +1,15 @@
 #include<iostream>
-#include"collision_detection/morton_number.hpp"
-#include<Windows.h>
+#include"shape/shape.hpp"
+#include"collision_detection/tree.hpp"
+#include"tree_impl/001/tree_impl.hpp"
 
 
 
 int main()
 {
-	std::cout << collision_detection::get_morton_number(0.1, 0.2, 0.1, 0.2, -1.f, -1.f, 0.5f, 0.5f, 2) << "\n";
-	std::cout << collision_detection::get_morton_number(-0.9, 0.9, -0.9, 0.9, -1.f, -1.f, 0.5f, 0.5f, 2) << "\n";
-	std::cout << collision_detection::get_morton_number(0.1, 0.9, -0.9, -0.1, -1.f, -1.f, 0.5f, 0.5f, 2) << "\n";
-	//std::cout << sizeof(unsigned short) << " " << sizeof(unsigned long) << "\n";
-	//std::cout << sizeof(WORD) << " " << sizeof(DWORD) << "\n";
+	collision_detection::tree<my::tree_imple001<my::vec2f>> t{ 1,-1.f,1.f,-1.f,1.f };
+	t.clear();
+	t.search();
 
 	return 0;
 }

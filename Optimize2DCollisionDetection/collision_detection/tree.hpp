@@ -11,7 +11,7 @@ namespace collision_detection
 		TreeImpl m_tree_impl;
 
 	public:
-		tree(unsigned int level, float left, float right, float bottom, float top)
+		constexpr tree(unsigned int level, float left, float right, float bottom, float top)
 			:m_tree_impl { level,left,right,bottom,top }
 		{}
 

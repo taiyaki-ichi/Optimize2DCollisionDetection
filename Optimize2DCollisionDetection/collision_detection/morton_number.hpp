@@ -32,11 +32,11 @@ namespace collision_detection
 			else
 				return 4 * pow_of_four(n - 1);
 		}
+	}
 
-		inline constexpr unsigned long pow_of_four_sum(unsigned int n)
-		{
-			return (pow_of_four(n + 1) - 1) / 3;
-		}
+	inline constexpr unsigned long pow_of_four_sum(unsigned int n)
+	{
+		return (pow_of_four(n + 1) - 1) / 3;
 	}
 
 	//–{‘Ì
