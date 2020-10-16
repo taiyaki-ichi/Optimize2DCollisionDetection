@@ -1,36 +1,16 @@
 #include<iostream>
-#include"timer.hpp"
-#include"vec2f.hpp"
-#include<vector>
-#include"shape/shape.hpp"
-#include"shape/traits.hpp"
+#include"collision_detection/morton_number.hpp"
+#include<Windows.h>
 
 
-struct hoge
-{
-	static bool collision_detection(const my::shape& a, const my::shape& b)
-	{
-		std::cout << "hoge colliiiiiii!\n";
-		return true;
-	}
-};
 
 int main()
 {
-	constexpr my::vec2f v1{ 1.f,2.f };
-	constexpr my::vec2f v2{ 4.f,1.f };
-	constexpr my::vec2f v3{ 5.f,3.f };
-	constexpr my::vec2f v4{ 2.f,4.f };
-
-	my::shape s{ v1,v2,v3,v4 };
-
-	auto [l, r, b, t] = collision_detection::range_traits<my::shape>::get_range(s);
-
-	std::cout << l << " " << r << " " << b << " " << t << std::endl;
-
-	collision_detection::collision_detection_traits<my::shape>::collision_detection<hoge>(s, s);
-
-	collision_detection::hit_traits<my::shape>::hit(s, s);
+	std::cout << collision_detection::get_morton_number(0.1, 0.2, 0.1, 0.2, -1.f, -1.f, 0.5f, 0.5f, 2) << "\n";
+	std::cout << collision_detection::get_morton_number(-0.9, 0.9, -0.9, 0.9, -1.f, -1.f, 0.5f, 0.5f, 2) << "\n";
+	std::cout << collision_detection::get_morton_number(0.1, 0.9, -0.9, -0.1, -1.f, -1.f, 0.5f, 0.5f, 2) << "\n";
+	//std::cout << sizeof(unsigned short) << " " << sizeof(unsigned long) << "\n";
+	//std::cout << sizeof(WORD) << " " << sizeof(DWORD) << "\n";
 
 	return 0;
 }

@@ -12,5 +12,11 @@
     <ClInclude Include="collision_detection\traits\hit_traits.hpp" />
     <ClInclude Include="collision_detection\traits\range_traits.hpp" />
     <ClInclude Include="collision_detection\tree.hpp" />
+    <ClInclude Include="tester.hpp" />
+    <ClInclude Include="collsion_detection_policy\001.hpp" />
+    <ClInclude Include="tree_impl\001\tree_impl.hpp" />
+    <ClInclude Include="tree_impl\001\LinerObject.hpp" />
+    <ClInclude Include="tree_impl\001\SpaceCell.hpp" />
+    <ClInclude Include="collision_detection\morton_number.hpp" />
   </ItemGroup>
 </Project>
