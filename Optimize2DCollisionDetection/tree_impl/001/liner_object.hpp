@@ -4,80 +4,80 @@
 namespace my
 {
 	template<typename T>
-	class SpaceCell;
+	class space_cell;
 
 	template<typename T>
-	class LinerObject
+	class liner_object
 	{
-		T* mPtr;
+		const T* m_ptr;
 
 	public:
-		LinerObject<T>* mPreLinerObject;
-		LinerObject<T>* mNextLinerObject;
+		liner_object<T>* m_pre_liner_object;
+		liner_object<T>* m_next_liner_object;
 		//èäëÆÇ∑ÇÈãÛä‘
-		SpaceCell<T>* mSpaceCell;
+		space_cell<T>* m_space_cell;
 
-		LinerObject(T* ptr=nullptr)
-			:mPtr{ptr}
-			, mPreLinerObject{nullptr}
-			, mNextLinerObject{nullptr}
-			, mSpaceCell{nullptr}
+		liner_object(const T* ptr=nullptr)
+			:m_ptr{ptr}
+			, m_pre_liner_object{nullptr}
+			, m_next_liner_object{nullptr}
+			, m_space_cell{nullptr}
 		{}
-		~LinerObject() = default;
+		~liner_object() = default;
 
-		T* GetPtr() const noexcept {
-			return mPtr;
+		const T* get_ptr() const noexcept {
+			return m_ptr;
 		}
 
-		void ClearPtr() noexcept {
-			mPtr = nullptr;
+		void clear_ptr() noexcept {
+			m_ptr = nullptr;
 		}
 
-		void SetPtr(T* ptr) noexcept {
-			mPtr = ptr;
+		void set_ptr(const T* ptr) noexcept {
+			m_ptr = ptr;
 		}
 
-		void RemoveSpaceCell() {
-			if (mSpaceCell)
-				mSpaceCell->RemoveList(this);
-			mPreLinerObject = nullptr;
-			mNextLinerObject = nullptr;
+		void remove_space_cell() {
+			if (m_space_cell)
+				m_space_cell->remove_list(this);
+			m_pre_liner_object = nullptr;
+			m_next_liner_object = nullptr;
 		}
 	};
 
 	//LinerObjectÇÃä«óù
 	//O(1)Ç≈ë}ì¸
 	template<typename T>
-	class LinerObjectContainer
+	class liner_object_container
 	{
-		std::vector<LinerObject<T>> m_contanier;
+		std::vector<liner_object<T>> m_contanier;
 
 		rsize_t m_size;
 
 	public:
-		LinerObjectContainer(unsigned int size)
+		liner_object_container(unsigned int size)
 			:m_contanier(size)
 			, m_size{ 0 }
 		{}
 
-		const LinerObject<T>& GetLinerObject(const T& obj)
+		liner_object<T>* get_liner_object(const T& obj)
 		{
-			if (m_contanier.size() < m_size)
-				m_contanier[m_size].SetPtr(&obj);
+			if (m_contanier.size() >= m_size)
+				m_contanier[m_size].set_ptr(&obj);
 			else
-				m_contanier.emplace_back({ &obj });
+				m_contanier.emplace_back(liner_object<T>{ &obj });
 
 			m_size++;
-			return m_contanier[m_size - 1];
+			return &m_contanier[m_size - 1];
 		}
 
-		void Clear()
+		void clear()
 		{
 			for (rsize_t i = 0; i < m_size; i++) {
-				m_contanier[i].RemoveSpaceCell();
-				m_contanier[i].mPreLinerObject = nullptr;
-				m_contanier[i].mNextLinerObject = nullptr;
-				m_contanier[i].ClearPtr();
+				m_contanier[i].remove_space_cell();
+				m_contanier[i].m_pre_liner_object = nullptr;
+				m_contanier[i].m_next_liner_object = nullptr;
+				m_contanier[i].clear_ptr();
 			}
 			m_size = 0;
 		}

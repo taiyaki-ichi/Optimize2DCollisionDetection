@@ -53,13 +53,37 @@ namespace collision_detection
 		}
 	};
 
+	class hit_cnt
+	{
+		static unsigned int m_cnt;
+
+	public:
+		static void add() { m_cnt++; }
+		static unsigned int get() { return m_cnt; }
+		static void clear() { m_cnt = 0; }
+	};
+
+	unsigned int hit_cnt::m_cnt = 0;
+
 	//‚Æ‚è‚ ‚¦‚¸Õ“Ë‚µ‚½Shape‚Ì”‚ğ”‚¦‚é—\’è
 	template<>
 	struct hit_traits<my::shape>
 	{
 		static void hit(const my::shape& a, const my::shape& b)
 		{
+			hit_cnt::add();
 			std::cout << "hit!\n";
+			std::cout << "v1: ";
+			for (const auto& v : a)
+				std::cout << v.x << "," << v.y << "  ";
+			a.size();
+			std::cout << "\n";
+			std::cout << "v2: ";
+			for (const auto& v : b)
+				std::cout << v.x << "," << v.y << "  ";
+			std::cout << "\n\n";
+			
+			
 		}
 	};
 
