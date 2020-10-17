@@ -2,6 +2,7 @@
 #include"../collision_detection/traits/collision_detection_traits.hpp"
 #include"../collision_detection/traits/hit_traits.hpp"
 #include"../collision_detection/traits/range_traits.hpp"
+#include"../collision_detection/traits/shape_traits.hpp"
 #include"shape.hpp"
 
 #include<iostream>
@@ -83,7 +84,22 @@ namespace collision_detection
 				std::cout << v.x << "," << v.y << "  ";
 			std::cout << "\n\n";
 			
-			
+		}
+	};
+
+	template<>
+	struct shape_traits<my::shape>
+	{
+		static inline unsigned int get_vertex_num(const my::shape& s) {
+			return s.size();
+		}
+
+		static inline float get_vertex_x(const my::shape& s, unsigned int num) {
+			return s[num].x;
+		}
+
+		static inline float get_vertex_y(const my::shape& s, unsigned int num) {
+			return s[num].y;
 		}
 	};
 

@@ -150,6 +150,7 @@
     <ClInclude Include="collision_detection\traits\collision_detection_traits.hpp" />
     <ClInclude Include="collision_detection\traits\hit_traits.hpp" />
     <ClInclude Include="collision_detection\traits\range_traits.hpp" />
+    <ClInclude Include="collision_detection\traits\shape_traits.hpp" />
     <ClInclude Include="collision_detection\tree.hpp" />
     <ClInclude Include="collsion_detection_policy\001.hpp" />
     <ClInclude Include="shape\shape.hpp" />

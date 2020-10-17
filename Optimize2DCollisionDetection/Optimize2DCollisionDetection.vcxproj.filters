@@ -18,5 +18,6 @@
     <ClInclude Include="collision_detection\morton_number.hpp" />
     <ClInclude Include="tree_impl\001\space_cell.hpp" />
     <ClInclude Include="tree_impl\001\liner_object.hpp" />
+    <ClInclude Include="collision_detection\traits\shape_traits.hpp" />
   </ItemGroup>
 </Project>
