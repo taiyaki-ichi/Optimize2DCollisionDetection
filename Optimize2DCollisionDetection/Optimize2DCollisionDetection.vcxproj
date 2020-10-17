@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="collision_detection\math.hpp" />
     <ClInclude Include="collision_detection\morton_number.hpp" />
     <ClInclude Include="collision_detection\traits\collision_detection_traits.hpp" />
     <ClInclude Include="collision_detection\traits\hit_traits.hpp" />
