@@ -73,6 +73,7 @@ namespace collision_detection
 		static void hit(const my::shape& a, const my::shape& b)
 		{
 			hit_cnt::add();
+			/*
 			std::cout << "hit!\n";
 			std::cout << "v1: ";
 			for (const auto& v : a)
@@ -83,7 +84,7 @@ namespace collision_detection
 			for (const auto& v : b)
 				std::cout << v.x << "," << v.y << "  ";
 			std::cout << "\n\n";
-			
+			*/
 		}
 	};
 

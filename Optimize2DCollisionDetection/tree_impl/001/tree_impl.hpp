@@ -64,7 +64,7 @@ namespace my
 			auto number = collision_detection::get_morton_number(left, right, bottom, top,
 				m_range_left, m_range_bottom, m_range_unit_width, m_range_unit_height, m_tree_level);
 
-			std::cout << "num: " << number << "\n";
+			//std::cout << "num: " << number << "\n";
 
 			if (0 <= number && number < MAX_SPACECELL_NUM)
 			{

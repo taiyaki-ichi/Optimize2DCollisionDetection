@@ -30,7 +30,7 @@ namespace my
 		}
 
 		//タイマーの開始
-		inline void start() {
+		inline void do_test() {
 			using namespace std::chrono;
 			m_start = system_clock::now();
 		}
