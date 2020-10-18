@@ -7,7 +7,7 @@
 int main()
 {
 	my::shape base{ { 1.f,1.f},{ -1.f,1.f},{ -1.f,-1.f},{ 1.f,-1.f} };
-	std::vector<my::vec2f> moveVec{ {2.f,0.f},{3.f,0.f},{5.f,0.f},{-2.f,10.f},{-3.f,10.f},{-5.f,10.f} };
+	std::vector<my::vec2f> moveVec{ {2.f,0.f},{10.f,0.f},{20.f,0.f},{-20.f,10.f},{-30.f,10.f},{-50.f,10.f} };
 	std::vector<my::shape> s{};
 
 	my::shape tmp{};
