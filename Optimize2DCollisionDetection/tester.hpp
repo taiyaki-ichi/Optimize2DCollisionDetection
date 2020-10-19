@@ -33,15 +33,20 @@ namespace my
 
 		//計測の開始
 		//戻り値は結果
-		unsigned long do_test()
+		std::pair<unsigned long,std::vector<unsigned int>> do_test()
 		{
+			//テストの回数
+			constexpr unsigned int test_num = 60;
+
+			std::vector<unsigned int> cnt(test_num);
+
 			m_timer.clear();
 			m_timer.do_test();
 
 			//とりま60回にしておく
-			for (int i = 0; i < 60; i++)
+			for (int i = 0; i < test_num; i++)
 			{
-				//collision_detection::hit_cnt::clear();
+				collision_detection::hit_cnt::clear();
 
 				//木をクリア
 				m_tree.clear();
@@ -53,10 +58,12 @@ namespace my
 				//木の走査
 				m_tree.search();
 
-				//std::cout << collision_detection::hit_cnt::get() << "\n";
+				cnt[i] = collision_detection::hit_cnt::get();
 			}
 
-			return m_timer.get_ms();
+			unsigned long time = m_timer.get_ms();
+
+			return { time,cnt };
 		}
 	};
 }

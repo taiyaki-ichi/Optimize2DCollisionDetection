@@ -6,10 +6,12 @@
 #include"collsion_detection_policy/001.hpp"
 #include"tester.hpp"
 #include"load_data.hpp"
+#include"window/window.hpp"
 
 int main()
 {
 
+	/*
 	std::string file_name;
 	std::cout << "test data file_name: ";
 	std::cin >> file_name;
@@ -23,35 +25,38 @@ int main()
 	my::tester<my::tree_imple001<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
 	tester.set_data(data);
 
-	auto t = tester.do_test();
+	auto [t,cnt] = tester.do_test();
 	std::cout << "\n";
+
+	for (size_t i = 0; i < cnt.size(); i++)
+		std::cout << "cnt " << i << ": " << cnt[i] << "\n";
+	std::cout << "\n";
+
 	std::cout << "time: "<<t << "\n";
-	std::cout << "cnt: " << collision_detection::hit_cnt::get() << "\n";
-
-	/*
-
-	my::shape base{ { 1.f,1.f},{ -1.f,1.f},{ -1.f,-1.f},{ 1.f,-1.f} };
-	std::vector<my::vec2f> moveVec{ {2.f,0.f},{10.f,0.f},{20.f,0.f},{-20.f,10.f},{-30.f,10.f},{-50.f,10.f} };
-	std::vector<my::shape> s{};
-
-	my::shape tmp{};
-	for (auto move : moveVec)
-	{
-		tmp.clear();
-		for (const auto& v : base)
-			tmp.emplace_back(move + v);
-		s.emplace_back(std::move(tmp));
-	}
-
-	collision_detection::tree<my::tree_imple001<my::shape, my::cd_001<my::shape>>> t{ 2,-100.f,100.f,-100.f,100.f };
-	t.clear();
-	collision_detection::hit_cnt::clear();
-	for (const auto& shape : s)
-		t.resist(shape);
-	t.search();
-	std::cout << "cnt:" << collision_detection::hit_cnt::get();
-	
 	*/
+
+	auto hwnd = my::create_simple_window(L"aaa", 500.f, 500.f);
+	auto [hdc, hglrc] = my::init_opengl(hwnd);
+
+	wglMakeCurrent(hdc, hglrc);
+
+	glClearColor(0.2, 0.2, 0.2, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glColor3d(1.0, 0.0, 0.0);
+	glBegin(GL_POLYGON);
+	glVertex2d(-0.9, -0.9);
+	glVertex2d(0.9, -0.9);
+	glVertex2d(0.9, 0.9);
+	glVertex2d(-0.9, 0.9);
+	glEnd();
+
+	SwapBuffers(hdc);
+	wglMakeCurrent(NULL, NULL);
+
+	while (my::process_window_message());
+
+	my::shutdown(hwnd, hdc, hglrc);
 
 	return 0;
 }

@@ -21,5 +21,7 @@
     <ClInclude Include="collision_detection\traits\shape_traits.hpp" />
     <ClInclude Include="collision_detection\math.hpp" />
     <ClInclude Include="load_data.hpp" />
+    <ClInclude Include="window\window.hpp" />
+    <ClInclude Include="window\draw.hpp" />
   </ItemGroup>
 </Project>

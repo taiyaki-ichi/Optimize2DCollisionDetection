@@ -6,8 +6,6 @@
 
 namespace my
 {
-
-
 	std::tuple<std::vector<shape>,float,float,float,float> load_data(const std::string& file_name)
 	{
 		std::vector<shape> result{};
