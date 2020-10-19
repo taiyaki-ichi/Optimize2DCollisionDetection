@@ -12,7 +12,7 @@ namespace collision_detection
 
 	public:
 		constexpr tree(unsigned int level, float left, float right, float bottom, float top)
-			:m_tree_impl { level,left,right,bottom,top }
+			:m_tree_impl { level, left, right, bottom, top }
 		{}
 
 		//Object�̖؂ւ̓o�^

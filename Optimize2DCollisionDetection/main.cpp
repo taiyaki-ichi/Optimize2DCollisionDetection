@@ -5,6 +5,7 @@
 #include"tree_impl/001/tree_impl.hpp"
 #include"collsion_detection_policy/001.hpp"
 #include"tester.hpp"
+#include"load_data.hpp"
 
 int main()
 {
@@ -13,11 +14,19 @@ int main()
 	std::cout << "test data file_name: ";
 	std::cin >> file_name;
 
-	my::tester<my::tree_imple001<my::shape, my::cd_001<my::shape>>> tester{ 2,-100.f,100.f,-100.f,100.f };
-	tester.set_data(file_name);
+	unsigned int tree_level;
+	std::cout << "tree_level: ";
+	std::cin >> tree_level;
+
+	auto [data, left, right, bottom, top] = my::load_data(file_name);
+
+	my::tester<my::tree_imple001<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
+	tester.set_data(data);
 
 	auto t = tester.do_test();
-	std::cout << t;
+	std::cout << "\n";
+	std::cout << "time: "<<t << "\n";
+	std::cout << "cnt: " << collision_detection::hit_cnt::get() << "\n";
 
 	/*
 
@@ -43,5 +52,6 @@ int main()
 	std::cout << "cnt:" << collision_detection::hit_cnt::get();
 	
 	*/
+
 	return 0;
 }

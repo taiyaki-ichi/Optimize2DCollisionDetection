@@ -20,5 +20,6 @@
     <ClInclude Include="tree_impl\001\liner_object.hpp" />
     <ClInclude Include="collision_detection\traits\shape_traits.hpp" />
     <ClInclude Include="collision_detection\math.hpp" />
+    <ClInclude Include="load_data.hpp" />
   </ItemGroup>
 </Project>

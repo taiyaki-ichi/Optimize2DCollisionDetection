@@ -8,6 +8,7 @@
 
 #include"../../shape/traits.hpp"
 
+
 namespace my
 {
 	template<typename Object,
@@ -120,6 +121,8 @@ namespace my
 
 		void recursion_search_tree(unsigned int spaceCellNum)
 		{
+			//std::cout << spaceCellNum << "\n";
+
 			liner_object<Object>* linerObj1 = m_space_cell_array[spaceCellNum]->get_first_liner_object();
 			liner_object<Object>* linerObj2 = nullptr;
 

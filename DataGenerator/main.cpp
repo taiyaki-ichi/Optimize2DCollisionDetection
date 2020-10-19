@@ -107,6 +107,7 @@ int main()
 	i = 0;
 
 	file << n << "\n";
+	file << left << " " << right << " " << bottom << " " << top << "\n";
 	while (i < n)
 	{
 		//’¸“_‚Ì”
