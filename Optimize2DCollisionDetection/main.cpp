@@ -8,6 +8,7 @@
 #include"load_data.hpp"
 #include"window/window.hpp"
 #include"window/draw.hpp"
+#include"tree_impl/002/tree_impl.hpp"
 
 int main()
 {
@@ -23,7 +24,7 @@ int main()
 	auto [data, left, right, bottom, top] = my::load_data(file_name);
 
 
-	my::tester<my::tree_imple001<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
+	my::tester<my::tree_imple002<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
 	tester.set_data(data);
 
 	auto [t, cnt] = tester.do_test();

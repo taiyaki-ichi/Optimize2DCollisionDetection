@@ -167,7 +167,6 @@ namespace my
 			if (isAddThisSpaceLinerObject)
 				for (int i = 0; i < addLinerObjectNum; i++)
 					m_liner_object_tmp_stack.pop_back();
-			
 		}
 	};
 }
