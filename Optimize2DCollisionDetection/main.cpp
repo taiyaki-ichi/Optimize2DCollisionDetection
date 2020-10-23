@@ -9,10 +9,10 @@
 #include"window/window.hpp"
 #include"window/draw.hpp"
 #include"tree_impl/002/tree_impl.hpp"
+#include"tree_impl/003/tree_impl.hpp"
 
 int main()
 {
-	
 	std::string file_name;
 	std::cout << "test data file_name: ";
 	std::cin >> file_name;
@@ -23,18 +23,55 @@ int main()
 
 	auto [data, left, right, bottom, top] = my::load_data(file_name);
 
+	/*
+	{
+		std::cout << "\n001\n";
 
-	my::tester<my::tree_imple002<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
-	tester.set_data(data);
+		my::tester<my::tree_imple001<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
+		tester.set_data(data);
 
-	auto [t, cnt] = tester.do_test();
-	std::cout << "\n";
+		auto [t, cnt] = tester.do_test();
+		std::cout << "\n";
 
-	for (size_t i = 0; i < cnt.size(); i++)
-		std::cout << "cnt " << i << ": " << cnt[i] << "\n";
-	std::cout << "\n";
+		for (size_t i = 0; i < cnt.size(); i++)
+			std::cout << "cnt " << i << ": " << cnt[i] << "\n";
+		std::cout << "\n";
 
-	std::cout << "time: " << t << "\n";
+		std::cout << "time: " << t << "\n";
+	}
+
+	{
+
+		std::cout << "\n002\n";
+		my::tester<my::tree_imple002<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
+		tester.set_data(data);
+
+		auto [t, cnt] = tester.do_test();
+		std::cout << "\n";
+
+		for (size_t i = 0; i < cnt.size(); i++)
+			std::cout << "cnt " << i << ": " << cnt[i] << "\n";
+		std::cout << "\n";
+
+		std::cout << "time: " << t << "\n";
+	}
+	*/
+
+	{
+		std::cout << "\n003\n";
+
+		my::tester<my::tree_imple003<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
+		tester.set_data(data);
+
+		auto [t, cnt] = tester.do_test();
+		std::cout << "\n";
+
+		for (size_t i = 0; i < cnt.size(); i++)
+			std::cout << "cnt " << i << ": " << cnt[i] << "\n";
+		std::cout << "\n";
+
+		std::cout << "time: " << t << "\n";
+	}
 
 
 	constexpr float window_width = 600.f;

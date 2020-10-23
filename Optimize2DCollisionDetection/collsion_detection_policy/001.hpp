@@ -12,7 +12,7 @@ namespace my
 		{
 			using st = collision_detection::shape_traits<Shape>;
 			unsigned int num = collision_detection::shape_traits<Shape>::get_vertex_num(s);
-			for (int i = 0; i < num - 1; i++)
+			for (unsigned i = 0; i < num - 1; i++)
 			{
 				if (collision_detection::get_cross_z(
 					st::get_vertex_x(s, i) - st::get_vertex_x(s, i + 1), st::get_vertex_y(s, i) - st::get_vertex_y(s, i + 1),

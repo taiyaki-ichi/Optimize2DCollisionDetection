@@ -6,15 +6,13 @@
 #include"../../collision_detection/morton_number.hpp"
 #include<array>
 
-//#include"../../shape/traits.hpp"
-
 namespace my
 {
 	template<typename Object,
 		typename CollisionDetection = typename collision_detection::collision_detection_traits<Object>,
 		typename Hit = typename collision_detection::hit_traits<Object>,
 		typename Range = typename collision_detection::range_traits<Object>>
-		class tree_imple002
+		class tree_imple003
 	{
 	public:
 		//tree用
@@ -25,7 +23,7 @@ namespace my
 		static constexpr unsigned int MAX_SPACECELL_NUM = collision_detection::pow_of_four_sum(MAX_TREE_LEVEL);
 
 	private:
-		std::array<space_cell002<Object>, MAX_SPACECELL_NUM> m_space_cell_array;
+		std::array<space_cell003<Object>, MAX_SPACECELL_NUM> m_space_cell_array;
 
 		//オブジェクトの数、clearでリセット
 		unsigned int m_object_num;
@@ -38,7 +36,7 @@ namespace my
 		const unsigned int m_tree_level;
 
 	public:
-		constexpr tree_imple002(unsigned int level, float left, float right, float bottom, float top)
+		constexpr tree_imple003(unsigned int level, float left, float right, float bottom, float top)
 			:m_space_cell_array{}
 			, m_tree_level{ level }
 			, m_range_left{ left }
@@ -69,6 +67,7 @@ namespace my
 		void search()
 		{
 			std::vector<const Object*> stack{};
+			//容量確保
 			stack.reserve(m_object_num);
 			recursion_search_tree(std::move(stack), 0);
 		}
@@ -109,34 +108,32 @@ namespace my
 			}
 		}
 
-		void do_collision_detection(const Object* a, const Object* b)
-		{
+		//実際に当たり判定を行いhitを適用
+		void do_collision_detection(const Object* a, const Object* b){
 			if (CollisionDetection::collision_detection(*a, *b))
 				Hit::hit(*a, *b);
 		}
 
-		
-		std::vector<const Object*> recursion_search_tree(std::vector<const Object*> stack,unsigned int spaceCellNum)
+		//再帰して木の走査
+		std::vector<const Object*> recursion_search_tree(std::vector<const Object*> stack, unsigned int spaceCellNum)
 		{
-			
-			auto obj_iter1 = m_space_cell_array[spaceCellNum].begin();
-			auto end_iter = m_space_cell_array[spaceCellNum].end();
-			while (obj_iter1 != end_iter)
+			unsigned int obj_index1, obj_index2;
+			for (obj_index1 = 0; obj_index1 < m_space_cell_array[spaceCellNum].size(); obj_index1++)
 			{
-				auto obj_iter2 = obj_iter1 + 1;
-				while (obj_iter2 != end_iter)
+				//同じ空間に所属しているObject同士
+				for (obj_index2 = obj_index1 + 1; obj_index2 < m_space_cell_array[spaceCellNum].size(); obj_index2++)
 				{
-					do_collision_detection(*obj_iter1, *obj_iter2);
-					obj_iter2 = obj_iter2 + 1;
+					do_collision_detection(m_space_cell_array[spaceCellNum][obj_index1], m_space_cell_array[spaceCellNum][obj_index2]);
 				}
 
+				//spaceCellNumより上位の空間に所属しているObject同士
 				if (!stack.empty())
 					for (const auto obj : stack)
-						do_collision_detection(*obj_iter1, obj);
+						do_collision_detection(m_space_cell_array[spaceCellNum][obj_index1], obj);
 
-				obj_iter1 = obj_iter1 + 1;
 			}
 
+			//stackに追加した分を記録しておく
 			bool isAddThisSpaceLinerObject = false;
 			int addLinerObjectNum = 0;
 
@@ -146,26 +143,27 @@ namespace my
 				if (nextSpaceCellNum < MAX_SPACECELL_NUM && m_space_cell_array[nextSpaceCellNum].m_has_object_flag)
 				{
 					if (!isAddThisSpaceLinerObject) {
-						auto obj_iter = m_space_cell_array[spaceCellNum].begin();
-						auto end = m_space_cell_array[spaceCellNum].end();
-						while (obj_iter != end) {
-							stack.emplace_back(*obj_iter);
+						
+						for (obj_index1 = 0; obj_index1 < m_space_cell_array[spaceCellNum].size(); obj_index1++) {
+							stack.emplace_back(m_space_cell_array[spaceCellNum][obj_index1]);
+							//後でstackから取り出すのでカウントしておく
 							addLinerObjectNum++;
-							obj_iter = obj_iter + 1;
 						}
 					}
 					isAddThisSpaceLinerObject = true;
 
+					//もぐる
 					stack = recursion_search_tree(std::move(stack), nextSpaceCellNum);
 				}
 			}
 
+			//戻ってきたときに追加した分を削除
 			if (isAddThisSpaceLinerObject)
 				for (int i = 0; i < addLinerObjectNum; i++)
 					stack.pop_back();
-					
+
 			return std::move(stack);
 		}
-		
+
 	};
 }
