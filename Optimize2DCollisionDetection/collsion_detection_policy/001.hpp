@@ -7,11 +7,11 @@ namespace my
 	namespace
 	{
 		//“_p‚ªs‚Ì“à‘¤‚©‚Ç‚¤‚©
-		template<typename Shape>
-		inline bool is_inside_rect(float p_x, float p_y, const Shape& s)
+		template<typename T>
+		inline bool is_inside_rect(float p_x, float p_y, const T& s)
 		{
-			using st = collision_detection::shape_traits<Shape>;
-			unsigned int num = collision_detection::shape_traits<Shape>::get_vertex_num(s);
+			using st = collision_detection::shape_traits<T>;
+			unsigned int num = collision_detection::shape_traits<T>::get_vertex_num(s);
 			for (unsigned i = 0; i < num - 1; i++)
 			{
 				if (collision_detection::get_cross_z(
@@ -44,16 +44,15 @@ namespace my
 		}
 	}
 
-	template<typename Shape>
+	template<typename T>
 	struct cd_001
 	{
-		static bool collision_detection(const Shape& a, const Shape& b)
+		static bool collision_detection(const T& a, const T& b)
 		{
-			using st = collision_detection::shape_traits<Shape>;
+			using st = collision_detection::shape_traits<T>;
 			unsigned int aNum = st::get_vertex_num(a);
 			unsigned int bNum = st::get_vertex_num(b);
 
-			
 			//“_‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©
 			for (unsigned int i = 0; i < aNum; i++)
 				if (is_inside_rect(st::get_vertex_x(a, i), st::get_vertex_y(a, i), b))
@@ -62,7 +61,6 @@ namespace my
 				if (is_inside_rect(st::get_vertex_x(b, i), st::get_vertex_y(b, i), a))
 					return true;
 					
-
 			//•Ó‚ªŒð·‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
 			unsigned int a_j, b_j;
 			for(unsigned int a_i=0;a_i<aNum;a_i++)
@@ -75,7 +73,6 @@ namespace my
 						st::get_vertex_x(b, b_i), st::get_vertex_y(b, b_i), st::get_vertex_x(b, b_j), st::get_vertex_y(b, b_j)))
 						return true;
 				}
-				
 
 			return false;
 		}

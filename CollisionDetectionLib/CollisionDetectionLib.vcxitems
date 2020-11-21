@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{18f7d3f0-38bb-465c-a91d-8b99c6ac66e6}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\policy.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\traits.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\tree.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\default_collision_detection_policy.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\morton_number.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\space_cell.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\tree_impl.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\utility.hpp" />
+  </ItemGroup>
+</Project>

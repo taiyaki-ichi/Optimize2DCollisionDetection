@@ -27,5 +27,6 @@
     <ClInclude Include="tree_impl\002\tree_impl.hpp" />
     <ClInclude Include="tree_impl\003\space_cell.hpp" />
     <ClInclude Include="tree_impl\003\tree_impl.hpp" />
+    <ClInclude Include="collsion_detection_policy\002.hpp" />
   </ItemGroup>
 </Project>

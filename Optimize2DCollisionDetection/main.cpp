@@ -10,6 +10,7 @@
 #include"window/draw.hpp"
 #include"tree_impl/002/tree_impl.hpp"
 #include"tree_impl/003/tree_impl.hpp"
+#include"collsion_detection_policy/002.hpp"
 
 int main()
 {
@@ -60,7 +61,7 @@ int main()
 	{
 		std::cout << "\n003\n";
 
-		my::tester<my::tree_imple003<my::shape, my::cd_001<my::shape>>> tester{ tree_level,left,right,bottom,top };
+		my::tester<my::tree_imple003<my::shape, my::cd_002<my::shape>>> tester{ tree_level,left,right,bottom,top };
 		tester.set_data(data);
 
 		auto [t, cnt] = tester.do_test();
