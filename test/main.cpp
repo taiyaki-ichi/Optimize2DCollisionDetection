@@ -27,7 +27,9 @@ int main()
 
 	auto [data, left, right, bottom, top] = my::load_data(file_name);
 
-	collision_detection::tree<my::shape,my::hit_p> t{ tree_level,left,right,bottom,top };
+	collision_detection::tree<my::shape, my::hit_p> t{};// t{ tree_level,left,right,bottom,top };
+	t.set_level(tree_level);
+	t.set_range(left, right, bottom, top);
 
 	t.clear();
 

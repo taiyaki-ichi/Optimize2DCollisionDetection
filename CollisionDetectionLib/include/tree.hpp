@@ -19,6 +19,7 @@ namespace collision_detection
 	class tree
 	{
 	public:
+		tree();
 		tree(unsigned int level, float left, float right, float bottom, float top);
 
 		//Objectの木への登録
@@ -31,6 +32,10 @@ namespace collision_detection
 
 		//木のクリア
 		inline void clear();
+
+		//セッタ
+		inline void set_range(float left, float right, float bottom, float top);
+		inline void set_level(unsigned int level);
 
 		//コピー禁止
 		tree(tree&) = delete;

@@ -8,11 +8,28 @@
 
 namespace collision_detection
 {
+	template<typename T, typename HitPolicy, typename CollitionDetectionPolicy, int MAX_TREE_LEVEL>
+	tree<T, HitPolicy, CollitionDetectionPolicy, MAX_TREE_LEVEL>::tree()
+		:m_tree_impl{ nullptr }
+	{
+		m_tree_impl = std::make_unique<tree_impl<T, HitPolicy, CollitionDetectionPolicy, MAX_TREE_LEVEL>>();
+	}
+
 	template<typename T, typename HitPolicy, typename CollitionDetectionPolicy,int MAX_TREE_LEVEL>
 	tree<T,HitPolicy,CollitionDetectionPolicy, MAX_TREE_LEVEL>::tree(unsigned int level, float left, float right, float bottom, float top)
 		:m_tree_impl{ nullptr }
 	{
 		m_tree_impl = std::make_unique<tree_impl<T,HitPolicy,CollitionDetectionPolicy,MAX_TREE_LEVEL>>(level, left, right, bottom, top);
+	}
+
+	template<typename T, typename HitPolicy, typename CollitionDetectionPolicy, int MAX_TREE_LEVEL>
+	void tree<T, HitPolicy, CollitionDetectionPolicy, MAX_TREE_LEVEL>::set_range(float left, float right, float bottom, float top) {
+		m_tree_impl->set_range(left, right, bottom, top);
+	}
+
+	template<typename T, typename HitPolicy, typename CollitionDetectionPolicy, int MAX_TREE_LEVEL>
+	void tree<T, HitPolicy, CollitionDetectionPolicy, MAX_TREE_LEVEL>::set_level(unsigned int level) {
+		m_tree_impl->set_level(level);
 	}
 
 	template<typename T, typename HitPolicy, typename CollitionDetectionPolicy,int MAX_TREE_LEVEL>
@@ -49,13 +66,23 @@ namespace collision_detection
 		unsigned int m_object_num;
 
 		//モートン番号用の情報
-		const float m_range_left;
-		const float m_range_bottom;
-		const float m_range_unit_width;
-		const float m_range_unit_height;
-		const unsigned int m_tree_level;
+		float m_range_left;
+		float m_range_bottom;
+		float m_range_unit_width;
+		float m_range_unit_height;
+		unsigned int m_tree_level;
 
 	public:
+		tree_impl()
+			:m_space_cell_array{}
+			, m_tree_level{}
+			, m_range_left{}
+			, m_range_bottom{}
+			, m_range_unit_width{}
+			, m_range_unit_height{}
+			, m_object_num{}
+		{}
+
 		tree_impl(unsigned int level, float left, float right, float bottom, float top)
 			:m_space_cell_array{}
 			, m_tree_level{ level }
@@ -65,6 +92,24 @@ namespace collision_detection
 			, m_range_unit_height{ (top - bottom) / (1 << level) }
 			, m_object_num{}
 		{}
+
+		//セッタ
+		void set_range(float left, float right, float bottom, float top)
+		{
+			m_range_left = left;
+			m_range_bottom = bottom;
+			m_range_unit_width = (right - left) / (1 << m_tree_level);
+			m_range_unit_height = (top - bottom) / (1 << m_tree_level);
+		}
+		void set_level(unsigned int level)
+		{
+			float right = m_range_unit_width * (1 << m_tree_level) + m_range_left;
+			float top = m_range_unit_height * (1 << m_tree_level) + m_range_bottom;
+
+			m_tree_level = level;
+			m_range_unit_width = (right - m_range_left) / (1 << m_tree_level);
+			m_range_unit_height = (top - m_range_bottom) / (1 << m_tree_level);
+		}
 
 		void regist(const T& obj)
 		{
